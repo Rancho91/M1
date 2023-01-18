@@ -106,7 +106,7 @@ function test() {
    console.log(a); //undefined
    console.log(foo()); //2 
 
-   var a = 1;
+   var a = 1; 
    function foo() {
       return 2;
    }
@@ -128,7 +128,7 @@ function getFood(food) {
    return snack;
 }
 
-getFood(false);
+getFood(false); // mew mix
 ```
 
 ### This

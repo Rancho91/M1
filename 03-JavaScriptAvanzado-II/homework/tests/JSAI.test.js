@@ -8,7 +8,7 @@ const {
   getNombreAlumno,
   textoAsteriscos,
   textoGuiones,
-  textoUnderscore
+  textoUnderscore 
 } = require('../homework');
 
 describe('counter', () => {
