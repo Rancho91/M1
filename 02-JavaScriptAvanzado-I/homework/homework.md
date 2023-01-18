@@ -13,15 +13,15 @@ var b = 10;
 var c = function (a, b, c) {
    var x = 10;
    console.log(x); // 10
-   console.log(a); // 5
+   console.log(a); // 8 (porque se le esta ingresando a la funcion ese valor)
    var f = function (a, b, c) {
       b = a;
-      console.log(b); // undefined
+      console.log(b); // 8
       b = c;
       var x = 5;
    };
    f(a, b, c);
-   console.log(b); //10
+   console.log(b); //9 (esta dentro del contexto linea 13)
 };
 c(8, 9, 10); 
 console.log(b); // 10
@@ -29,7 +29,7 @@ console.log(x); // 1
 ```
 
 ```javascript
-console.log(bar); // error
+console.log(bar); // undefined
 console.log(baz); //error
 foo(); // Hola
 function foo() {
@@ -50,12 +50,12 @@ console.log(instructor); //franco
 ```javascript
 var instructor = 'Tony';
 console.log(instructor); //tony
-(function () {
+(function () {    
    if (true) {
       var instructor = 'Franco';
       console.log(instructor); //franco
    }
-})();
+})(); //funcion autoinvocada, se usa una unica vez. contexto propio
 console.log(instructor); //tony
 ```
 
@@ -66,9 +66,9 @@ if (true) {
    var instructor = 'The Flash';
    let pm = 'Reverse Flash';
    console.log(instructor); //the flash
-   console.log(pm); //pm
+   console.log(pm); // reverse flash
 }
-console.log(instructor); //tony
+console.log(instructor); //the flash (sobre escribe porque es un if, esta en mismo contexto)
 console.log(pm);  //franco
 ```
 
@@ -79,18 +79,18 @@ console.log(pm);  //franco
 ```javascript
 6 / "3" //2
 "2" * "3" //6
-4 + 5 + "px" // 45px
+4 + 5 + "px" // 9px (se resuelve de izquierda a derecha, por eso es nueve)
 "$" + 4 + 5 // $45
 "4" - 2 // 2
 "4px" - 2 // NaN
 7 / 0 //infinity
-{}[0] // 0
+{}[0] // undefined (llave es como bloque de codigo, )
 parseInt("09") //9
-5 && 2 
+5 && 2  // las compuertas logicas toman los numeros como true, y 0 como false, el and toma el ultimo valor y el or toma el primero que evalua.
 2 && 5
 5 || 0
 0 || 5
-[3]+[3]-[10] //-4
+[3]+[3]-[10] //23
 3>2>1 // false
 [] == ![] //false
 ```
@@ -121,14 +121,14 @@ Y el de este código? :
 var snack = 'Meow Mix';
 
 function getFood(food) {
-   if (food) {
+   if (food) { //si es false, no ingresan a los if
       var snack = 'Friskies';
       return snack;
    }
    return snack;
 }
 
-getFood(false); // mew mix
+getFood(false); // undefined
 ```
 
 ### This
@@ -147,11 +147,11 @@ var obj = {
    },
 };
 
-console.log(obj.prop.getFullname());
+console.log(obj.prop.getFullname()); //Aurelio sol ()
 
-var test = obj.prop.getFullname;
+var test = obj.prop.getFullname; // test es igual a la funcion getfullname, 
 
-console.log(test());
+console.log(test()); // undefined (cuando se lo llama apunta al global) 
 ```
 
 ### Event loop
@@ -168,7 +168,7 @@ function printing() {
       console.log(3);
    }, 0);
    console.log(4);
-}
+} ///1 - 4 - 3 - 2
 
 printing();
 ```
