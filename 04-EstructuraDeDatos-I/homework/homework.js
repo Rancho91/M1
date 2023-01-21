@@ -16,13 +16,14 @@ Como ejercicio adicional y completamente opcional, al terminar de resolver este 
 
 function nFactorial(n) {
  
- if(n < 2 && n> 0){return 1} 
+  if(n < 2 && n> 0){return 1} 
  else if(n<1){return 0}
   else {
   return n *nFactorial(n-1);}
 
  }
      
+
 // function sumar(num) {
  // if(num >= 10) return num;
  // var total = num + 2;
